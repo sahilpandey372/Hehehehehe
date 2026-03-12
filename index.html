@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ishu ✦</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;500&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #050a18;
+    --deep-blue: #0a1628;
+    --navy: #0d1f3c;
+    --blue-glow: #1a3a6b;
+    --star-blue: #4a90d9;
+    --soft-blue: #7eb8f7;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --white: #f0eee8;
+    --cream: #faf8f3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: #050a18 !important; }
+
+  body {
+    background: #050a18 !important;
+    background-color: #050a18 !important;
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  #stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+    opacity: 0;
+  }
+
+  @keyframes twinkle {
+    0%   { opacity: 0.1; transform: scale(1); }
+    100% { opacity: var(--max-op); transform: scale(1.4); }
+  }
+
+  .shoot {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: shoot var(--sd) linear infinite;
+    animation-delay: var(--sdel);
+    opacity: 0;
+  }
+  .shoot::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 1px;
+    background: linear-gradient(to left, white, transparent);
+    transform-origin: right center;
+  }
+
+  @keyframes shoot {
+    0%   { opacity: 0; transform: translate(0, 0); }
+    5%   { opacity: 1; }
+    100% { opacity: 0; transform: translate(-600px, 400px); }
+  }
+
+  .nebula {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 20%, rgba(26,58,107,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 70%, rgba(74,80,170,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 50% 50%, rgba(10,22,40,0.8) 0%, transparent 100%);
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    0%   { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 1;   transform: scale(1.05); }
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    opacity: 0;
+    text-transform: uppercase;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+
+  .hero-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(5rem, 15vw, 12rem);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--white);
+    text-shadow:
+      0 0 60px rgba(126,184,247,0.4),
+      0 0 120px rgba(74,144,217,0.2);
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards 0.9s;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(240,238,232,0.7);
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards 1.4s;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 2.5s;
+    color: rgba(126,184,247,0.6);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(126,184,247,0.6), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50% { transform: scaleY(1.3); opacity: 1; }
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .divider-line {
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .divider-star {
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .section-title.visible { opacity: 1; transform: translateY(0); }
+
+  .intro {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .intro p {
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+    font-style: italic;
+    line-height: 1.8;
+    color: rgba(240,238,232,0.85);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .intro p.visible { opacity: 1; transform: translateY(0); }
+
+  .reasons {
+    padding: 2rem 2rem 6rem;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .reason-card {
+    position: relative;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reason-card.visible { opacity: 1; transform: translateY(0); }
+
+  .reason-card:nth-child(odd) { padding-left: 4rem; }
+  .reason-card:nth-child(even) { padding-right: 4rem; text-align: right; }
+
+  .reason-number {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(4rem, 10vw, 7rem);
+    font-weight: 400;
+    color: rgba(74,144,217,0.08);
+    position: absolute;
+    top: -1.5rem;
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.4s ease;
+  }
+  .reason-card:nth-child(odd) .reason-number  { left: 0; }
+  .reason-card:nth-child(even) .reason-number { right: 0; }
+  .reason-card:hover .reason-number { color: rgba(74,144,217,0.18); }
+
+  .reason-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(126,184,247,0.5));
+  }
+
+  .reason-text {
+    font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+    line-height: 1.75;
+    color: var(--white);
+    font-style: italic;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reason-text em {
+    font-style: normal;
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  .reason-card::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .reason-card:nth-child(odd)::before  { left: 1.5rem; }
+  .reason-card:nth-child(even)::before { right: 1.5rem; }
+  .reason-card:hover::before { opacity: 1; }
+
+  .closing {
+    text-align: center;
+    padding: 3rem 2rem 6rem;
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .closing.visible { opacity: 1; transform: translateY(0); }
+
+  .closing-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(201,168,76,0.3);
+    margin-bottom: 0.5rem;
+  }
+
+  .closing-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(240,238,232,0.55);
+    letter-spacing: 0.05em;
+  }
+
+  .hearts {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .heart-float {
+    position: absolute;
+    bottom: -50px;
+    font-size: 1rem;
+    animation: floatUp var(--fh-d) ease-in-out infinite;
+    animation-delay: var(--fh-del);
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1); opacity: 0; }
+    20%  { opacity: 0.6; }
+    80%  { opacity: 0.3; }
+    100% { transform: translateY(-100vh) scale(0.5) rotate(20deg); opacity: 0; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .reason-card:nth-child(odd)  { padding-left: 2.5rem; }
+    .reason-card:nth-child(even) { padding-right: 2.5rem; }
+    .reason-card:nth-child(odd)::before  { left: 0.5rem; }
+    .reason-card:nth-child(even)::before { right: 0.5rem; }
+    .reason-number { font-size: 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+<div class="nebula"></div>
+<div class="hearts" id="hearts"></div>
+
+<main>
+  <section class="hero">
+    <p class="hero-subtitle">A letter written in starlight, for</p>
+    <h1 class="hero-name">Ishu</h1>
+    <p class="hero-tagline">the woman who made the universe feel small</p>
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-star">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="intro">
+    <p class="reveal">There are people who come into your life quietly — and then there are people like you, Ishu. The ones who rearrange everything, without even trying.</p>
+  </div>
+
+  <p class="section-title reveal" style="position:relative;z-index:1;">The reasons I love you</p>
+
+  <section class="reasons">
+    <div class="reason-card reveal">
+      <span class="reason-number">01</span>
+      <span class="reason-icon">🌙</span>
+      <p class="reason-text">
+        You carry yourself with a quiet strength that <em>takes my breath away</em>. Not the loud, forceful kind — but the kind that bends without breaking, that stands tall even on the hardest days. Watching you move through the world with such grace makes me believe in people more than I ever thought I could.
+      </p>
+    </div>
+
+    <div class="reason-card reveal">
+      <span class="reason-number">02</span>
+      <span class="reason-icon">💫</span>
+      <p class="reason-text">
+        The way you talk to me — like I'm <em>the only person in the room</em>, like I matter, like I am enough — is something I never knew I needed until I had it. You make me feel like the luckiest person alive, not because of grand gestures, but because of the warmth in your voice when you say my name.
+      </p>
+    </div>
+
+    <div class="reason-card reveal">
+      <span class="reason-number">03</span>
+      <span class="reason-icon">⚡</span>
+      <p class="reason-text">
+        When the world gets messy — and it always does — you face it with a clarity that <em>leaves me in awe</em>. You don't crumble, you don't panic. You look a difficult moment straight in the eye and handle it with such poise that I find myself thinking: she is, without a doubt, the strongest person I know.
+      </p>
+    </div>
+
+    <div class="reason-card reveal">
+      <span class="reason-number">04</span>
+      <span class="reason-icon">✨</span>
+      <p class="reason-text">
+        Your smile — oh, Ishu. Your smile is the kind of thing <em>poets spend their whole lives trying to describe</em>. And your laugh? It is the most honest, beautiful sound I have ever heard. It is my favorite thing in the world. It always will be.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-star">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="closing reveal">
+    <p class="closing-signature">Forever yours ♡</p>
+    <p class="closing-note">written somewhere between the stars, just for you</p>
+  </div>
+</main>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 220; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() < 0.8 ? Math.random() * 1.5 + 0.5 : Math.random() * 2.5 + 1.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      --d:${2+Math.random()*5}s;
+      --max-op:${0.3+Math.random()*0.8};
+      animation-delay:${Math.random()*6}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  for (let i = 0; i < 4; i++) {
+    const s = document.createElement('div');
+    s.className = 'shoot';
+    s.style.cssText = `
+      top:${Math.random()*40}%;
+      left:${60+Math.random()*40}%;
+      --sd:${6+Math.random()*8}s;
+      --sdel:${Math.random()*12}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  const heartsEl = document.getElementById('hearts');
+  const heartEmojis = ['💙','✦','💫','⭐','🌙'];
+  for (let i = 0; i < 10; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-float';
+    h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    h.style.cssText = `
+      left:${Math.random()*100}%;
+      --fh-d:${8+Math.random()*10}s;
+      --fh-del:${Math.random()*15}s;
+      font-size:${0.7+Math.random()*0.8}rem;
+    `;
+    heartsEl.appendChild(h);
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
